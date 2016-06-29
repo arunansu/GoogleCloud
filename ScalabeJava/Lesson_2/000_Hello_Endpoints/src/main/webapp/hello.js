@@ -52,6 +52,13 @@ function enableButtons () {
 	
 	// Update the button label now that the button is active
 	btn.value="Click me for a personal greeting";
+	
+	// Set the onclick action for the third button
+	btn = document.getElementById("input_greet_by_period");
+	btn.onclick=function(){greetByPeriod();};
+	
+	// Update the button label now that the button is active
+	btn.value="Click me for a period greeting";
 }
 
 /*
@@ -70,6 +77,17 @@ function greetGenerically () {
  * Execute a request to the sayHelloByName() endpoints function.
  * Illustrates calling an endpoints function that takes an argument.
  */
+function greetByPeriod () {
+	// Get the name from the name_field element
+	var name = document.getElementById("name_field").value;
+	var timeOfDay = document.getElementById("period_field").value;
+	// Call the sayHelloByName() function.
+	// It takes one argument "name"
+	// On success, pass the response to sayHelloCallback()
+	var request = gapi.client.helloworldendpoints.greetByPeriod({'name': name, 'period': timeOfDay});
+	request.execute(sayHelloCallback);
+}
+
 function greetByName () {
 	// Get the name from the name_field element
 	var name = document.getElementById("name_field").value;
